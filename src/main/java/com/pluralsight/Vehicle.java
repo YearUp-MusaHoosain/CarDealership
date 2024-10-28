@@ -89,6 +89,6 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return String.format("%d|%d|%s|%s|%s|%s|%d|%f", getVinNumber(), getYearNumber(), getCarMake(), getCarModel(), getVehicleType(), getCarColor(), getCarOdometer(), getCarPrice());
+        return String.format("%d|%d|%s|%s|%s|%s|%d|%f\n", getVinNumber(), getYearNumber(), getCarMake(), getCarModel(), getVehicleType(), getCarColor(), getCarOdometer(), getCarPrice());
     }
 }

@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -9,17 +10,20 @@ import java.util.regex.Pattern;
 public class DealershipFileManager {
 
     public final static String dataFileName = "inventory.csv";
-    public static ArrayList<Vehicle> carInventory = getCarInventory();
+
 
     // This Method gets all the Car Inventory from the inventory.csv
-    public static ArrayList<Vehicle> getCarInventory(){
-        ArrayList<Vehicle> carInventory = new ArrayList<Vehicle>();
+    public static Dealership getDealership(){
+        ArrayList<Vehicle> carInventory = null;
+        Dealership dealership = null;
         try{
             FileReader fr = new FileReader(dataFileName);
             BufferedReader br = new BufferedReader(fr);
 
-            br.readLine();
+            String[] firstLineData = br.readLine().split("\\|");
+            dealership = new Dealership(firstLineData[0], firstLineData[1], firstLineData[2]);
 
+            carInventory = dealership.getAllVehicles();
             String input;
             while( (input = br.readLine()) != null){
                 String[] tokens = input.split(Pattern.quote("|"));
@@ -40,48 +44,31 @@ public class DealershipFileManager {
             System.out.println("ERROR!!");
             e.printStackTrace();
         }
-        return carInventory;
-    }
-    // todo make first line of inventory.csv readable and separated
-    public static ArrayList<Vehicle> getCarDealershipInformation(){
-        ArrayList<Vehicle> carInventory = new ArrayList<Vehicle>();
-        try{
-            FileReader fr = new FileReader(dataFileName);
-            BufferedReader br = new BufferedReader(fr);
-
-            String input;
-            while( (input = br.readLine()) != null){
-                String[] tokens = input.split(Pattern.quote("|"));
-                String dealershipName = tokens[0];
-                String dealershipAddress = tokens[1];
-                String dealershipPhoneNumber = tokens[2];
-                Dealership d = new Dealership(dealershipName, dealershipAddress, dealershipPhoneNumber);
-//                carInventory.add(d);
-            }
-            br.close();
-        }
-        catch (Exception e){
-            System.out.println("ERROR!!");
-            e.printStackTrace();
-        }
-        return carInventory;
+        return dealership;
     }
 
     // This Method writes car inventory info to the inventory.csv
-    public static void writeTransactions(){
-
+    public static void saveDealership(Dealership dealership){
+        ArrayList<Vehicle> carInventory = dealership.getAllVehicles();
         try{
-            FileWriter fw = new FileWriter(dataFileName);
+            BufferedWriter bw = new BufferedWriter(new FileWriter(dataFileName));
 
-            fw.write("D & B Used Cars|111 Old Benbrook Rd|817-555-5555\n");
+            bw.write(dealership.getName() + dealership.getAddress() + dealership.getPhoneNumber());
+//            bw.write("D & B Used Cars|111 Old Benbrook Rd|817-555-5555\n");
 
             for(Vehicle v : carInventory){
-                String data = v.getVinNumber() + "|" + v.getYearNumber() + "|" + v.getCarMake() + "|" + v.getCarModel() + "|" +
-                        v.getVehicleType() + "|" + v.getCarColor() + "|" + v.getCarOdometer() + "|" + v.getCarPrice() + "\n";
-                fw.write(data);
+                bw.write( new StringBuilder()
+                        .append(v.getVinNumber()).append("|")
+                        .append(v.getYearNumber()).append("|")
+                        .append(v.getCarMake()).append("|")
+                        .append(v.getCarModel()).append("|")
+                        .append(v.getVehicleType()).append("|")
+                        .append(v.getCarColor()).append("|")
+                        .append(v.getCarOdometer()).append("|")
+                        .append(v.getCarPrice()).append("|").toString());
             }
 
-            fw.close();
+            bw.close();
         } catch (Exception e) {
             System.out.println("FILE WRITE ERROR");
             e.printStackTrace();

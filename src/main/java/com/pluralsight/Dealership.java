@@ -23,10 +23,8 @@ public class Dealership {
 
     public void removeVehicle(Vehicle vehicle){}
 
-    public void getAllVehicles(){
-        for (Vehicle vehicle : carInventory){
-            System.out.println(vehicle.toString());
-        }
+    public ArrayList<Vehicle> getAllVehicles(){
+        return carInventory;
     }
 
     public ArrayList<Vehicle> getVehiclesByPrice(double min, double max){
@@ -50,4 +48,15 @@ public class Dealership {
     }
 
 
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 }
