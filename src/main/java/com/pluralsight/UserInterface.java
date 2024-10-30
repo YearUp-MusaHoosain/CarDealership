@@ -90,6 +90,11 @@ public class UserInterface {
         } while(true);
     }
 
+    public void displayVehicles(Vehicle v){
+        System.out.println(v);
+
+    }
+
     public void processAddVehicleRequest(){
         int vin = Console.PromptForInt("Enter Vin: ");
         int year = Console.PromptForInt("Enter year: ");
@@ -122,6 +127,10 @@ public class UserInterface {
 
     public void processGetByVehicleTypeRequest(){}
 
-    public void processGetAllVehicles(){}
+    public void processGetAllVehicles(){
+        for(Vehicle v: currentDealership.getAllVehicles()){
+            displayVehicles(v);
+        }
+    }
 
 }
