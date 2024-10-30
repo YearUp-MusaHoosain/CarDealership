@@ -9,11 +9,8 @@ import java.util.regex.Pattern;
 
 public class DealershipFileManager {
 
-    public final static String dataFileName = "inventory.csv";
-
-
     // This Method gets all the Car Inventory from the inventory.csv
-    public static Dealership getDealership(){
+    public static Dealership getFromCSV(String dataFileName){
         ArrayList<Vehicle> carInventory = null;
         Dealership dealership = null;
         try{
@@ -48,7 +45,7 @@ public class DealershipFileManager {
     }
 
     // This Method writes car inventory info to the inventory.csv
-    public static void saveDealership(Dealership dealership){
+    public static void saveDealership(Dealership dealership, String dataFileName){
         ArrayList<Vehicle> carInventory = dealership.getAllVehicles();
         try{
             BufferedWriter bw = new BufferedWriter(new FileWriter(dataFileName));
@@ -65,7 +62,7 @@ public class DealershipFileManager {
                         .append(v.getVehicleType()).append("|")
                         .append(v.getCarColor()).append("|")
                         .append(v.getCarOdometer()).append("|")
-                        .append(v.getCarPrice()).append("|").toString());
+                        .append(v.getCarPrice()).append("|").append("\n").toString());
             }
 
             bw.close();

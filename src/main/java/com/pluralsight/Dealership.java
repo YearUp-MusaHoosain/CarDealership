@@ -17,6 +17,30 @@ public class Dealership {
         this.carInventory = new ArrayList<Vehicle>();
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public void addVehicle(Vehicle vehicle){
         carInventory.add(vehicle);
     }
@@ -48,15 +72,4 @@ public class Dealership {
     }
 
 
-    public String getName() {
-        return name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
 }
