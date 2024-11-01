@@ -85,6 +85,7 @@ public class UserInterface {
 
                 }
             } catch (Exception e){
+                e.printStackTrace();
                 System.out.println("ERROR, please try again with valid commands.");
             }
         } while(true);
@@ -93,6 +94,12 @@ public class UserInterface {
     public void displayVehicles(Vehicle v){
         System.out.println(v);
 
+    }
+
+    public void processGetAllVehicles(){
+        for(Vehicle v: currentDealership.getAllVehicles()){
+            displayVehicles(v);
+        }
     }
 
     public void processAddVehicleRequest(){
@@ -105,17 +112,26 @@ public class UserInterface {
         int odometer = Console.PromptForInt("Enter odometer: ");
         double price = Console.PromptForDouble("Enter price: ");
 
-        Vehicle v = new Vehicle(vin,year, make, model, vehicleType, color, odometer, price);
-
-        currentDealership.addVehicle(v);
+        this.currentDealership.addVehicle(vin, year, make, model, vehicleType, color, odometer, price);
         DealershipFileManager.saveDealership(currentDealership, dataFileName);
     }
 
-    public void processRemoveVehicleRequest(){}
+    public void processRemoveVehicleRequest(){
+        int vin = Console.PromptForInt("Enter Vin of the vehicle you want to remove: ");
 
-    public void displayInventory(){}
+        currentDealership.removeVehicle(vin);
+        DealershipFileManager.saveDealership(currentDealership, dataFileName);
+    }
 
-    public void processGetByPriceRequest(){}
+    public void processGetByPriceRequest(){
+//        double price = Console.PromptForDouble("Enter price: ");
+//
+//        for (Vehicle v : currentDealership) {
+//            if (v.getCarPrice() == price) {
+//                System.out.println(v.toString());
+//            }
+//        }
+    }
 
     public void processGetByMakeModelRequest(){}
 
@@ -127,10 +143,5 @@ public class UserInterface {
 
     public void processGetByVehicleTypeRequest(){}
 
-    public void processGetAllVehicles(){
-        for(Vehicle v: currentDealership.getAllVehicles()){
-            displayVehicles(v);
-        }
-    }
 
 }

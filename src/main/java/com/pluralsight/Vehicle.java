@@ -11,6 +11,7 @@ public class Vehicle {
     private int carOdometer;
     private double carPrice;
 
+    public Vehicle(){}
 
     public Vehicle(int vinNumber, int yearNumber, String carMake, String carModel, String vehicleType, String carColor, int carOdometer, double carPrice) {
         this.vinNumber = vinNumber;
@@ -89,6 +90,14 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return String.format("%d|%d|%s|%s|%s|%s|%d|%f\n", getVinNumber(), getYearNumber(), getCarMake(), getCarModel(), getVehicleType(), getCarColor(), getCarOdometer(), getCarPrice());
+        return String.format("%d|%d|%s|%s|%s|%s|%d|%.2f",
+                getVinNumber(),
+                getYearNumber(),
+                getCarMake(),
+                getCarModel(),
+                getVehicleType(),
+                getCarColor(),
+                getCarOdometer(),
+                getCarPrice());
     }
 }

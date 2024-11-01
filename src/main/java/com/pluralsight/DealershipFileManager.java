@@ -50,7 +50,7 @@ public class DealershipFileManager {
         try{
             BufferedWriter bw = new BufferedWriter(new FileWriter(dataFileName));
 
-            bw.write(dealership.getName() + dealership.getAddress() + dealership.getPhoneNumber());
+            bw.write(dealership.getName() + "|" + dealership.getAddress() + "|" + dealership.getPhoneNumber() + "\n");
 //            bw.write("D & B Used Cars|111 Old Benbrook Rd|817-555-5555\n");
 
             for(Vehicle v : carInventory){

@@ -9,6 +9,7 @@ public class Dealership {
     private String phoneNumber;
     private ArrayList<Vehicle> carInventory;
 
+    public Dealership(){}
 
     public Dealership(String name, String address, String phoneNumber) {
         this.name = name;
@@ -17,35 +18,27 @@ public class Dealership {
         this.carInventory = new ArrayList<Vehicle>();
     }
 
-    public String getName() {
-        return name;
+
+    public void addVehicle(int vinNumber, int yearNumber, String carMake, String carModel, String vehicleType, String carColor, int carOdometer, double carPrice){
+        carInventory.add(new Vehicle(vinNumber, yearNumber, carMake, carModel, vehicleType, carColor, carOdometer, carPrice));
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void removeVehicle(int vinNumber){
+        Vehicle vehicleToRemove = null;
 
-    public String getAddress() {
-        return address;
-    }
+        for (Vehicle v : carInventory){
+            if (v.getVinNumber() == vinNumber){
+                vehicleToRemove = v;
+            }
+        }
+        if (vehicleToRemove != null) {
+            carInventory.remove(vehicleToRemove);
+            System.out.println("Vehicle with VIN " + vinNumber + " removed.");
+        } else {
+            System.out.println("Vehicle with VIN " + vinNumber + " not found.");
+        }
 
-    public void setAddress(String address) {
-        this.address = address;
     }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public void addVehicle(Vehicle vehicle){
-        carInventory.add(vehicle);
-    }
-
-    public void removeVehicle(Vehicle vehicle){}
 
     public ArrayList<Vehicle> getAllVehicles(){
         return carInventory;
@@ -71,5 +64,28 @@ public class Dealership {
         return null;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
 }
